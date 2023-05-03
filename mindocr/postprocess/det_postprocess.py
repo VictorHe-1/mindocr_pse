@@ -23,7 +23,7 @@ class DBPostprocess:
         self._name = pred_name
         self._names = {'binary': 0, 'thresh': 1, 'thresh_binary': 2}
 
-    def __call__(self, pred):
+    def __call__(self, pred, **kwargs):
         """
         pred (Union[Tensor, Tuple[Tensor], np.ndarray]):
             binary: text region segmentation map, with shape (N, 1, H, W)
@@ -134,8 +134,8 @@ class PSEPostprocess:
     def __call__(self, pred, **kwargs):  # pred: N 7 H W
         if not isinstance(pred, Tensor):
             pred = Tensor(pred)
-        shape_list = kwargs['image_shape']
-        print("shape_list = ", shape_list)
+        shape_idx = 2
+        shape_list = kwargs['labels'][shape_idx].asnumpy()
         pred = self._interpolate(pred, scale_factor=4 // self._scale)
         score = self._sigmoid(pred[:, 0, :, :])
 

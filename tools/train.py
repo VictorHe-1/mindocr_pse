@@ -135,6 +135,8 @@ def main(cfg):
         batch_size=cfg.train.loader.batch_size,
         ckpt_save_dir=cfg.train.ckpt_save_dir,
         main_indicator=cfg.metric.main_indicator,
+        num_columns_to_net=cfg.eval.dataset.get('num_columns_to_net', 1),
+        num_columns_of_labels=cfg.eval.dataset.get('num_columns_of_labels', None),
         val_interval=cfg.system.get('val_interval', 1),
         val_start_epoch=cfg.system.get('val_start_epoch', 1),
         log_interval=cfg.system.get('log_interval', 100)

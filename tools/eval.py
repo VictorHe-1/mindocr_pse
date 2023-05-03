@@ -23,7 +23,7 @@ from mindocr.utils.callbacks import Evaluator
 
 def main(cfg):
     # env init
-    ms.set_context(device_id=2, mode=cfg.system.mode)
+    ms.set_context(mode=cfg.system.mode)
     if cfg.system.distribute:
         init()
         device_num = get_group_size()
